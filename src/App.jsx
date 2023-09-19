@@ -1,4 +1,5 @@
 import './App.css'
+import '@mantine/core/styles.css';
 import {MantineProvider ,Button} from '@mantine/core';
 
 function App() {
