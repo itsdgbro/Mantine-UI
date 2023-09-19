@@ -1,6 +1,5 @@
 # Mantine-UI
 React+Vite app using Mantine UI
 
-
-![png-transparent-react-javascript-angularjs-ionic-github-text-logo-symmetry](https://github.com/itsdgbro/Mantine-UI/assets/94692679/b92315d0-98d8-41e3-b88c-7690704a7436)
-![image](https://github.com/itsdgbro/Mantine-UI/assets/94692679/28337248-4fc7-4fbf-8767-b483f29ac4ca)
+![image](https://github.com/itsdgbro/Mantine-UI/assets/94692679/4038ed22-d3aa-438c-bdca-aa49f792b665)
+![image](https://github.com/itsdgbro/Mantine-UI/assets/94692679/582f8203-9f4f-429d-9dce-85142f632f94)
