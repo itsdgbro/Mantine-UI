@@ -1,20 +1,25 @@
 import './App.css'
 import '@mantine/core/styles.css';
+import { useDisclosure } from '@mantine/hooks';
+import Signup from './Pages/Signup';
+import Login from './Pages/Login';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import {
   MantineProvider,
-  Center,
-  Box,
   createTheme,
-  Button,
-  Text,
   AppShell,
+  Title,
   Burger,
-  List,
-  ThemeIcon
+  Flex,
+  Center,
+  BackgroundImage,
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import Form from './Pages/Form';
-import { PersonIcon, ExitIcon, MobileIcon } from '@radix-ui/react-icons'
+import Header from './Header/Header';
+import Navbar from './Header/NavBar';
+import Home from './Pages/Home';
+import background from './Images/Background.gif'
+import homeBg from './Images/Home.gif'
+import { useEffect, useState } from 'react';
 
 const theme = createTheme({
   fontFamily: "Inter",
@@ -24,61 +29,54 @@ const theme = createTheme({
 
 function App() {
   const [opened, { toggle }] = useDisclosure();
+  const [backgroundImage, setBackgroundImage] = useState(homeBg);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setBackgroundImage(homeBg);
+    } else {
+      setBackgroundImage(background);
+    }
+  }, [location]); 
+
   return (
     <>
       <MantineProvider theme={theme}>
-        <AppShell
-          header={{ height: 60 }}
-          navbar={{ width: 300, breakpoint: 'sm', collapsed: { desktop: !opened, mobile: !opened } }}
-          padding="md"
-        >
-          <AppShell.Header >
-            <Burger opened={opened} onClick={toggle} size="sm" />
-            <div>Logo</div>
-          </AppShell.Header>
+        <BackgroundImage src={backgroundImage}>
+          <AppShell
+            header={{ height: 70 }}
+            navbar={{ width: 300, breakpoint: 'sm', collapsed: { desktop: !opened, mobile: !opened } }}
+            padding="md"
+            h={'100vh'}
+          >
+            <AppShell.Header>
+              <Flex direction={'row'} justify={'space-between'} align={'center'}>
+                <Flex direction={'column'} pl={10} align={'flex-start'}>
+                  <Burger opened={opened} onClick={toggle} size="md" />
+                  <Title order={3}>Logo</Title>
+                </Flex>
+                <Header opened={opened} onToggle={toggle} />
+              </Flex>
+            </AppShell.Header>
 
-          <AppShell.Navbar p="md">
-            <List
-              spacing="md"
-              listStyleType='none'
-              center
-            >
-              <List.Item
-                icon={
-                  <ThemeIcon size={20} color='indigo'>
-                    <PersonIcon />
-                  </ThemeIcon>
-                }
-              >
-                Profile
-              </List.Item>
+            <AppShell.Navbar p="md">
+              <Navbar />
+            </AppShell.Navbar>
 
-              <List.Item
-                icon={
-                  <ThemeIcon size={20} color='indigo' >
-                    <MobileIcon />
-                  </ThemeIcon>
-                }
-              >
-                Contacts
-              </List.Item>
 
-              <List.Item
-              icon={
-                <ThemeIcon size={20} color='indigo'>
-                  <ExitIcon />
-                </ThemeIcon>
-              }
-              >
-                Logout
-              </List.Item>
-            </List>
-          </AppShell.Navbar>
-
-          <AppShell.Main >
-            <Form />
-          </AppShell.Main>
-        </AppShell>
+            <AppShell.Main h={'100vh'}>
+              <Center h={'100%'}>
+                <Routes>
+                  <Route path='/' element={<Home />} />
+                  <Route path='/form' element={<Signup />} />
+                  <Route path='/login' element={<Login />} />
+                </Routes>
+              </Center>
+            </AppShell.Main>
+          </AppShell>
+        </BackgroundImage>
       </MantineProvider>
     </>
   )
