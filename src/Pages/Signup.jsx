@@ -55,6 +55,7 @@ export default function Signup() {
 
   const handleSubmit = () => {
     StoreUsers.addUser(form.values.name, form.values.email, form.values.password, form.values.gender);
+    form.reset();
     console.log(StoreUsers.getUsers());
   }
 

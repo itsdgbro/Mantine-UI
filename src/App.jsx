@@ -19,7 +19,9 @@ import Navbar from './Header/NavBar';
 import Home from './Pages/Home';
 import background from './Images/Background.gif'
 import homeBg from './Images/Home.gif'
+import dashboardBG from './Images/Dashboard.gif'
 import { useEffect, useState } from 'react';
+import Dashboard from './Pages/Dashboard';
 
 const theme = createTheme({
   fontFamily: "Inter",
@@ -36,7 +38,11 @@ function App() {
   useEffect(() => {
     if (location.pathname === '/') {
       setBackgroundImage(homeBg);
-    } else {
+    } 
+    else if (location.pathname === '/dashboard') {
+      setBackgroundImage(dashboardBG);
+    }
+    else{
       setBackgroundImage(background);
     }
   }, [location]); 
@@ -72,6 +78,7 @@ function App() {
                   <Route path='/' element={<Home />} />
                   <Route path='/form' element={<Signup />} />
                   <Route path='/login' element={<Login />} />
+                  <Route path='/dashboard' element={<Dashboard />} />
                 </Routes>
               </Center>
             </AppShell.Main>

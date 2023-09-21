@@ -2,6 +2,7 @@ import { TextInput, Flex, Button, Paper, Notification, Box } from "@mantine/core
 import { useForm } from "@mantine/form";
 import { useState } from "react";
 import { IconX, IconCheck } from '@tabler/icons-react';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [notification, setNotification] = useState(null);
@@ -17,7 +18,7 @@ function Login() {
       password: (value) => (value.length === 0 ? 'Required' : null)
     }
   })
-
+  let navigate = useNavigate();
   const handleSubmit = () => {
     const storedUsers = JSON.parse(localStorage.getItem('users'));
     const foundUser = storedUsers.find(users => users.email === user.values.email && users.password === user.values.password);
@@ -28,9 +29,9 @@ function Login() {
           Logging...
         </Notification>
       );
-
       setTimeout(() => {
         setNotification(null);
+        navigate('/dashboard')
       }, 1500); // Hide notification after 3 seconds
     } else {
       setNotification(
